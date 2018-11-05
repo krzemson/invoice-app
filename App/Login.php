@@ -37,9 +37,7 @@ class Login
         $obj = $result->fetch_object();
 
         if ($result->num_rows > 0 && $this->verifyUser($obj)) {
-            $user = ;
-            //redirect('home.php');
-            return true;
+            return $obj;
         } else {
             $this->errors['verify'][] = 'Podano niewłaściwy login lub hasło';
         }

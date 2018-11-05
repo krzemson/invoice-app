@@ -2,18 +2,26 @@
 
 use App\Login;
 
-$login = new Login();
+if ($session->isSigned()) {
+    redirect('dashboard.php');
+} else {
+    $login = new Login();
 
-if (isset($_POST['submit'])) {
-     $username = $_POST['username'];
-     $password = $_POST['password'];
+    if (isset($_POST['submit'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-     $login->setUsernameAndPassword($username, $password);
+        $login->setUsernameAndPassword($username, $password);
 
-    if ($login->validate()) {
-        $login->verify();
+        if ($login->validate()) {
+            if ($obj = $login->verify()) {
+                $session->login($obj);
+                redirect('dashboard.php');
+            };
+        }
     }
 }
+
 
 ?>
 <!doctype html>
