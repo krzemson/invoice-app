@@ -8,30 +8,14 @@
 
 namespace App;
 
-class User
+class User extends Model
 {
+    protected $table = "users";
+    protected $fillable = ['username', 'name', 'surname', 'email', 'password'];
     protected $id;
     public $username;
-    protected $db;
-
-    public function __construct($id = null)
-    {
-        $this->db = new Database();
-
-        if (!isset($this->id)) {
-            $this->findById($id);
-        }
-    }
-
-    private function findById($id)
-    {
-        $sql = "SELECT * FROM users WHERE id = $id";
-
-        $result = $this->db->query($sql);
-
-        $row = $result->fetch_assoc();
-
-        $this->id = $row['id'];
-        $this->username = $row['username'];
-    }
+    public $name;
+    public $surname;
+    public $email;
+    public $password;
 }

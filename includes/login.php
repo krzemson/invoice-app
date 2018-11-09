@@ -3,7 +3,7 @@
 use App\Login;
 
 if ($session->isSigned()) {
-    redirect('dashboard.php');
+    redirect('admin/dashboard.php');
 } else {
     $login = new Login();
 
@@ -16,7 +16,7 @@ if ($session->isSigned()) {
         if ($login->validate()) {
             if ($obj = $login->verify()) {
                 $session->login($obj);
-                redirect('dashboard.php');
+                redirect('admin/dashboard.php');
             };
         }
     }

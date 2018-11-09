@@ -40,4 +40,18 @@ class Session
             $this->signedIn = false;
         }
     }
+
+    public function user()
+    {
+        $user = new User();
+
+        return $user->findById($this->userId);
+    }
+
+    public function logout()
+    {
+        unset($_SESSION['userId']);
+        unset($this->userId);
+        $this->signedIn = false;
+    }
 }

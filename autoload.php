@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jakub
- * Date: 30.10.2018
- * Time: 16:09
- */
 
 function autoload($className)
 {
@@ -12,6 +6,8 @@ function autoload($className)
 
     if (file_exists($className.'.php')) {
         require_once($className.'.php');
+    } else {
+        require_once("../".$className.'.php');
     }
 }
 

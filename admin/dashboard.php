@@ -1,11 +1,15 @@
-<?php include("includes/header.php");?>
+<?php
+
+include("../includes/header.php");
+
+?>
 
 <body>
 
 <div id="wrapper">
 
     <!-- Navigation -->
-    <?php include("includes/navigation.php");?>
+    <?php include("../includes/navigation.php");?>
 
     <div id="page-wrapper">
         <div class="row">
@@ -16,7 +20,9 @@
         </div>
 
         <div class="row">
+            <?php
 
+            ?>
         </div>
 
 
@@ -29,4 +35,4 @@
 
 <!-- JS scripts -->
 
-<?php include("includes/scripts.php");?>
+<?php include("../includes/scripts.php");?>

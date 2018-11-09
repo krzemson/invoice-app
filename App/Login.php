@@ -17,7 +17,7 @@ class Login
 
     public function __construct()
     {
-        $this->db = new Database();
+        $this->db = Database::getInstance();
 
         return $this;
     }
@@ -30,9 +30,9 @@ class Login
 
     public function verify()
     {
-        $sql = "SELECT * FROM users WHERE username = '$this->username'";
+        $sql = "SELECT * FROM users WHERE username = ?";
 
-        $result = $this->db->query($sql);
+        $result = $this->db->query($sql, 's', $this->username);
 
         $obj = $result->fetch_object();
 
@@ -49,11 +49,7 @@ class Login
     {
         $this->checkIfFieldsAreEmpty();
 
-        if (empty($this->errors)) {
-            return true;
-        }
-
-        return false;
+        return (empty($this->errors)) ? true : false;
     }
 
     private function checkIfFieldsAreEmpty()
@@ -70,10 +66,7 @@ class Login
 
     public function has($value)
     {
-        if (array_key_exists($value, $this->errors)) {
-            return true;
-        }
-        return false;
+        return (array_key_exists($value, $this->errors)) ? true : false;
     }
 
     public function first($value)
@@ -83,9 +76,6 @@ class Login
 
     private function verifyUser($obj)
     {
-        if ($obj->username == $this->username && $obj->password == $this->password) {
-            return true;
-        }
-        return false;
+        return ($obj->username == $this->username && password_verify($this->password, $obj->password)) ? true : false;
     }
 }

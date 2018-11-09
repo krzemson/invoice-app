@@ -1,12 +1,11 @@
 <?php
-use App\User;
 
-require_once("init.php");
+require_once("../init.php");
 
 if (!$session->isSigned()) {
     redirect('index.php');
 } else {
-    $user = new User($_SESSION['userId']);
+    $profile = $session->user();
 }
 ?>
 <!DOCTYPE html>
@@ -14,7 +13,7 @@ if (!$session->isSigned()) {
 <head>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
