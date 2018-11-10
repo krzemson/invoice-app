@@ -245,7 +245,7 @@
                         </li>
 
                         <li>
-                            <a href="#">Dodaj klienta</a>
+                            <a href="/admin/addCustomer.php">Dodaj klienta</a>
                         </li>
 
                     </ul>

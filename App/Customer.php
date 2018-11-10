@@ -11,8 +11,9 @@ namespace App;
 class Customer extends Model
 {
     protected $table = "customers";
-    protected $fillable = ['name', 'surname', 'company', 'address', 'city', 'nip', 'regon'];
+    protected $fillable = ['user_id','name', 'surname', 'company', 'address', 'city', 'nip', 'regon'];
     protected $id;
+    public $user_id;
     public $name;
     public $surname;
     public $company;

@@ -8,8 +8,9 @@
 
 namespace App;
 
+use FPDF;
 
-class PDF
+class PDF extends FPDF
 {
 
 }

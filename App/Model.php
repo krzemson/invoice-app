@@ -75,16 +75,29 @@ abstract class Model
     {
         $properties = $this->properties();
 
-        $sql = "INSERT INTO $this->table (".implode(", ", array_keys($properties)).")";
-        $sql .= "VALUES (?, ?, ?, ?, ?)";
+        $types = [];
+        $signs = [];
 
         $params = array_values($properties);
 
-        foreach ($params as $key => $value) {
-            $params[$key] = &$params[$key];
+        for ($i = 0; $i < count($params); $i++) {
+            if (filter_var($params[$i], FILTER_VALIDATE_INT) === true) {
+                $types[] = "i";
+            } else {
+                $types[] = "s";
+            }
+
+            $signs[] = "?";
         }
 
-        $this->db->query($sql, "sssss", $params);
+        $types = implode("", $types);
+
+        $sql = "INSERT INTO $this->table (".implode(", ", array_keys($properties)).")";
+        $sql .= " VALUES (".implode(", ", $signs).")";
+
+
+
+        $this->db->query($sql, $types, $params);
 
         return true;
     }
