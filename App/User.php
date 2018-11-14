@@ -10,9 +10,9 @@ namespace App;
 
 class User extends Model
 {
-    protected $table = "users";
+    protected static $table = "users";
     protected $fillable = ['username', 'name', 'surname', 'email', 'password'];
-    protected $id;
+    public $id;
     public $username;
     public $name;
     public $surname;

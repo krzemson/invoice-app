@@ -10,9 +10,9 @@ namespace App;
 
 class Customer extends Model
 {
-    protected $table = "customers";
+    protected static $table = "customers";
     protected $fillable = ['user_id','name', 'surname', 'company', 'address', 'city', 'nip', 'regon'];
-    protected $id;
+    public $id;
     public $user_id;
     public $name;
     public $surname;
@@ -22,18 +22,18 @@ class Customer extends Model
     public $nip;
     public $regon;
 
-    public function findAllCustomers($id)
+    public static function findAllCustomers($id)
     {
-        $sql = "SELECT * FROM $this->table WHERE user_id = $id";
+        $sql = "SELECT * FROM ". self::$table ." WHERE user_id = $id";
 
-        $result = $this->db->query($sql);
+        $result = self::$db->query($sql);
 
         $rows = $result->fetch_all(MYSQLI_ASSOC);
 
         $objectsArray = [];
 
         foreach ($rows as $row) {
-            $objectsArray[] = $this->instance($row);
+            $objectsArray[] = static::instance($row);
         }
 
         return $objectsArray;

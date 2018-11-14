@@ -43,9 +43,8 @@ class Session
 
     public function user()
     {
-        $user = new User();
 
-        return $user->findById($this->userId);
+        return User::findById($this->userId);
     }
 
     public function logout()

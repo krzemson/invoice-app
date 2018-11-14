@@ -10,51 +10,62 @@ namespace App;
 
 abstract class Model
 {
-    protected $table;
+    protected static $table;
     protected $fillable;
-    protected $db;
+    protected static $db;
 
     public function __construct()
     {
-        $this->db = Database::getInstance();
+        static::$db = Database::getInstance();
 
         return $this;
     }
 
-    public function findById($id)
+    public static function findById($id)
     {
-        $sql = "SELECT * FROM $this->table WHERE id = ?";
+        static::$db = Database::getInstance();
 
-        $result = $this->db->query($sql, 'i', $id);
+        $sql = "SELECT * FROM ". static::$table ." WHERE id = ?";
+
+
+        $result = static::$db->query($sql, 'i', $id);
+
 
         $row = $result->fetch_assoc();
 
+        $class = get_called_class();
+
+        $object = new $class;
+
         foreach ($row as $attribute => $value) {
-            $this->$attribute = $value;
+            $object->$attribute = $value;
         }
 
-        return $this;
+        return $object;
     }
 
-    public function findAll()
+    public static function findAll()
     {
-        $sql = "SELECT * FROM $this->table";
+        static::$db = Database::getInstance();
 
-        $result = $this->db->query($sql);
+        $sql = "SELECT * FROM ". static::$table;
+
+        $result = static::$db->query($sql);
 
         $rows = $result->fetch_all(MYSQLI_ASSOC);
 
         $objectsArray = [];
 
         foreach ($rows as $row) {
-            $objectsArray[] = $this->instance($row);
+            $objectsArray[] = static::instance($row);
         }
 
         return $objectsArray;
     }
 
-    protected function instance($row)
+    protected static function instance($row)
     {
+
         $class = get_called_class();
 
         $object = new $class;
@@ -92,12 +103,12 @@ abstract class Model
 
         $types = implode("", $types);
 
-        $sql = "INSERT INTO $this->table (".implode(", ", array_keys($properties)).")";
+        $sql = "INSERT INTO ". static::$table ."(".implode(", ", array_keys($properties)).")";
         $sql .= " VALUES (".implode(", ", $signs).")";
 
 
 
-        $this->db->query($sql, $types, $params);
+        static::$db->query($sql, $types, $params);
 
         return true;
     }
@@ -112,7 +123,7 @@ abstract class Model
             $propertiesPairs[] = "$key = ?";
         }
 
-        $sql = "UPDATE  " .$this->table . "  SET ";
+        $sql = "UPDATE  " .static::$table . "  SET ";
         $sql .= implode(", ", $propertiesPairs);
         $sql .= " WHERE id= $this->id";
 
@@ -130,7 +141,7 @@ abstract class Model
 
         $types = implode("", $types);
 
-        $this->db->query($sql, $types, $params);
+        static::$db->query($sql, $types, $params);
 
         return true;
     }

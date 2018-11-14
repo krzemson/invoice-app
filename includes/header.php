@@ -3,7 +3,7 @@
 require_once("../init.php");
 
 if (!$session->isSigned()) {
-    redirect('index.php');
+    redirect('../index.php');
 } else {
     $profile = $session->user();
 }

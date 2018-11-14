@@ -235,7 +235,7 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/admin/dashboard.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="/admin/index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Klienci<span class="fa arrow"></span></a>
@@ -252,7 +252,7 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="/admin/invoice.php"><i class="fa fa-table fa-fw"></i> Wystaw fakturę</a>
+                    <a href="/admin/addInvoice.php"><i class="fa fa-table fa-fw"></i> Wystaw fakturę</a>
                 </li>
                 <li>
                     <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>

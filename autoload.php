@@ -1,8 +1,8 @@
 <?php
 
-function autoload($className)
+function autoload($class)
 {
-    str_replace('\\', '/', $className);
+    $className = str_replace('\\', '/', $class);
 
     if (file_exists($className.'.php')) {
         require_once($className.'.php');

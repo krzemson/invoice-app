@@ -4,9 +4,7 @@ use App\Customer;
 
 include("../includes/header.php");
 
-$customer = new Customer();
-
-$customers = $customer->findAllCustomers($_SESSION['userId']);
+$customers = Customer::findAllCustomers($_SESSION['userId']);
 
 $i= 1;
 ?>
