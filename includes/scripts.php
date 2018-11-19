@@ -39,7 +39,7 @@
                 "                                        <input id=\"netv"+c+"\" class=\"form-control\" name=\"netvalue[]\" type=\"text\" disabled>\n" +
                 "                                    </td>\n" +
                 "                                    <td><select name=\"tax\" id=\"\">\n" +
-                "                                            <option value=\"23%\">23%</option>\n" +
+                "                                            <option value=\"0.23\">23%</option>\n" +
                 "                                        </select></td>\n" +
                 "                                    <td><input id=\"tax"+c+"\" class=\"form-control\" name=\"taxvalue[]\" type=\"text\" disabled></td>\n" +
                 "                                    <td><input id=\"gross"+c+"\" class=\"form-control\" name=\"gross[]\" type=\"text\" disabled></td>\n" +

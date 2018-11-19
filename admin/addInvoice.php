@@ -80,13 +80,13 @@ $customers = Customer::findAllCustomers($profile->id);
                                     </td>
                                     <td><input id="net" class="form-control decimal" name="net[]" type="text"></td>
                                     <td>
-                                        <input id="netv" class="form-control" name="netvalue[]" type="text" disabled>
+                                        <input id="netv" class="form-control" type="text" disabled>
                                     </td>
                                     <td><select name="tax" id="">
                                             <option value="0.23">23%</option>
                                         </select></td>
-                                    <td><input id="tax" class="form-control" name="taxvalue[]" type="text" disabled></td>
-                                    <td><input id="gross" class="form-control" name="gross[]" type="text" disabled></td>
+                                    <td><input id="tax" class="form-control" type="text" disabled></td>
+                                    <td><input id="gross" class="form-control" type="text" disabled></td>
                                     <td></td>
                                 </tr>
 

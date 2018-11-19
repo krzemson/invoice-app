@@ -92,10 +92,10 @@ abstract class Model
         $params = array_values($properties);
 
         for ($i = 0; $i < count($params); $i++) {
-            if (filter_var($params[$i], FILTER_VALIDATE_INT) === true) {
-                $types[] = "i";
-            } else {
+            if (filter_var($params[$i], FILTER_VALIDATE_INT) === false) {
                 $types[] = "s";
+            } else {
+                $types[] = "i";
             }
 
             $signs[] = "?";
@@ -103,10 +103,8 @@ abstract class Model
 
         $types = implode("", $types);
 
-        $sql = "INSERT INTO ". static::$table ."(".implode(", ", array_keys($properties)).")";
+        $sql = "INSERT INTO ". static::$table ." (".implode(", ", array_keys($properties)).")";
         $sql .= " VALUES (".implode(", ", $signs).")";
-
-
 
         static::$db->query($sql, $types, $params);
 

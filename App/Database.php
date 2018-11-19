@@ -59,4 +59,8 @@ class Database
 
         return true;
     }
+
+    public function insertId() {
+        return $this->db->insert_id;
+    }
 }
