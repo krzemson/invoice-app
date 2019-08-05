@@ -1,14 +1,13 @@
 <?php
+
 use App\Customer;
 
 include("../includes/header.php");
 
-$message = $session->get('success');
+$customer = Customer::findById($_GET['id']);
 
 if (isset($_POST['submit'])) {
-    $customer = new Customer();
 
-    $customer->user_id = $_SESSION['userId'];
     $customer->name = $_POST['name'];
     $customer->surname = $_POST['surname'];
     $customer->company = $_POST['company'];
@@ -19,13 +18,9 @@ if (isset($_POST['submit'])) {
 
     $customer->save();
 
-    $session->flash('success', "Klient został dodany !");
-
-
-    redirect("addCustomer.php");
+    redirect('editCustomer.php?id='.$_GET['id']);
 
 }
-
 
 ?>
 
@@ -39,7 +34,7 @@ if (isset($_POST['submit'])) {
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Dodaj klienta</h1>
+                <h1 class="page-header">Edytuj klienta</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -49,48 +44,41 @@ if (isset($_POST['submit'])) {
                 <form method="POST">
                     <div class="form-group">
                         <label>Imię:</label>
-                        <input class="form-control" name="name" placeholder="Wprowadź imię" type="text">
+                        <input class="form-control" name="name" value="<?php echo $customer->name; ?>" type="text">
                     </div>
                     <div class="form-group">
                         <label>Nazwisko:</label>
-                        <input class="form-control" name="surname" placeholder="Wprowadź nazwisko" type="text">
+                        <input class="form-control" name="surname" value="<?php echo $customer->surname; ?>" type="text">
                     </div>
                     <div class="form-group">
                         <label>Firma:</label>
-                        <input class="form-control" name="company" placeholder="Wprowadź nazwę firmy" type="text">
+                        <input class="form-control" name="company" value="<?php echo $customer->company; ?>" type="text">
                     </div>
 
                     <div class="form-group">
                         <label>Adres:</label>
-                        <input class="form-control" name="address" placeholder="Wprowadź adres" type="text">
+                        <input class="form-control" name="address" value="<?php echo $customer->address; ?>" type="text">
                     </div>
 
                     <div class="form-group">
                         <label>Miasto:</label>
-                        <input class="form-control" name="city" placeholder="Wprowadź miasto" type="text">
+                        <input class="form-control" name="city" value="<?php echo $customer->city; ?>" type="text">
                     </div>
 
                     <div class="form-group">
                         <label>NIP:</label>
-                        <input class="form-control" name="nip" placeholder="Wprowadź NIP" type="text">
+                        <input class="form-control" name="nip" value="<?php echo $customer->nip; ?>" type="text">
                     </div>
 
                     <div class="form-group">
                         <label>REGON:</label>
-                        <input class="form-control" name="regon" placeholder="Wprowadź REGON" type="text">
+                        <input class="form-control" name="regon" value="<?php echo $customer->regon; ?>" type="text">
                     </div>
 
                     <div class="form-group">
-                        <input class="btn btn-primary" name="submit" type="submit" value="Dodaj klienta">
+                        <input class="btn btn-primary" name="submit" type="submit" value="Edytuj klienta">
                     </div>
                 </form>
-                    <?php if (isset($message)):?>
-                <div class="alert alert-success">
-
-                        <?php echo $message; ?>
-                </div>
-                    <?php endif; ?>
-
             </div>
 
         </div>

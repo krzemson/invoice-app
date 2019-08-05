@@ -252,7 +252,34 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="/admin/addInvoice.php"><i class="fa fa-table fa-fw"></i> Wystaw fakturę</a>
+
+                    <a href="#"><i class="fa fa-table fa-fw"></i> Faktury<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">Faktury sprzedaży <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a href="/admin/invoices.php">Wszystkie faktury sprzedaży</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/addInvoice.php">Wystaw fakturę sprzedaży</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#">Faktury zakupu <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a href="#">Wszystkie faktury zakupu</a>
+                                </li>
+                                <li>
+                                    <a href="#">Wprowadź fakturę zakupu</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
                 </li>
                 <li>
                     <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>

@@ -7,6 +7,14 @@ include("../includes/header.php");
 $customers = Customer::findAllCustomers($_SESSION['userId']);
 
 $i= 1;
+
+if (isset($_POST['submit'])) {
+    Customer::deleteCustomer($_POST['id']);
+
+    redirect('customers.php');
+}
+
+
 ?>
 
 <body>
@@ -15,6 +23,10 @@ $i= 1;
 
     <!-- Navigation -->
     <?php include("../includes/navigation.php");?>
+
+    <?php
+
+         ?>
 
     <div id="page-wrapper">
         <div class="row">
@@ -38,6 +50,8 @@ $i= 1;
                             <th>Miasto</th>
                             <th>NIP</th>
                             <th>REGON</th>
+                            <th class="text-center">Edytuj</th>
+                            <th class="text-center">Usuń</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -51,6 +65,13 @@ $i= 1;
                             <td><?php echo $customer->city; ?></td>
                             <td><?php echo $customer->nip; ?></td>
                             <td><?php echo $customer->regon; ?></td>
+                            <td align="center"><a href="editCustomer.php?id=<?php echo $customer->id; ?>" class="btn btn-primary">Edytuj</a></td>
+                            <td align="center">
+                                <form action="" method="post">
+                                    <input type="hidden" value="<?php echo $customer->id; ?>" name="id">
+                                    <button name="submit" type="submit" class="btn btn-danger" onclick="return confirm('Na pewno chcesz usunąć klienta ?');">Usuń</button>
+                                </form>
+                            </td>
                         </tr>
                             <?php $i++;?>
                         <?php endforeach;?>

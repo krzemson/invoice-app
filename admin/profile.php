@@ -2,13 +2,20 @@
 include("../includes/header.php");
 
 if (isset($_POST['submit'])) {
-    $profile->name = $_POST['name'];
-    $profile->surname = $_POST['surname'];
-    $profile->email = $_POST['email'];
+    $profile->name = trim(htmlspecialchars($_POST['name']));
+    $profile->surname = trim(htmlspecialchars($_POST['surname']));
+    $profile->email = trim(htmlspecialchars($_POST['email']));
+    $profile->company = trim(htmlspecialchars($_POST['company']));
+    $profile->address = trim(htmlspecialchars($_POST['address']));
+    $profile->city = trim(htmlspecialchars($_POST['city']));
+    $profile->nip = trim(htmlspecialchars($_POST['nip']));
+    $profile->regon = trim(htmlspecialchars($_POST['regon']));
 
     !(empty($_POST['password'])) ? $profile->password = password_hash($_POST['password'], PASSWORD_DEFAULT) : null;
 
     $profile->save();
+
+    redirect('profile.php');
 }
 
 ?>
@@ -46,6 +53,31 @@ if (isset($_POST['submit'])) {
                     <div class="form-group">
                         <label>E-mail:</label>
                         <input class="form-control" name="email" value="<?php echo $profile->email ?>" type="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Firma:</label>
+                        <input class="form-control" name="company" value="<?php echo $profile->company ?>" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ulica:</label>
+                        <input class="form-control" name="address" value="<?php echo $profile->address ?>" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Miasto:</label>
+                        <input class="form-control" name="city" value="<?php echo $profile->city ?>" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label>NIP:</label>
+                        <input class="form-control" name="nip" value="<?php echo $profile->nip ?>" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label>REGON:</label>
+                        <input class="form-control" name="regon" value="<?php echo $profile->regon ?>" type="text">
                     </div>
 
                     <div class="form-group">

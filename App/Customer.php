@@ -38,4 +38,13 @@ class Customer extends Model
 
         return $objectsArray;
     }
+
+    public static function deleteCustomer($id)
+    {
+        $sql = "DELETE FROM customers WHERE id = $id";
+
+        self::$db->query($sql);
+
+        return true;
+    }
 }

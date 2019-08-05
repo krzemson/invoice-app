@@ -24,7 +24,7 @@ $customers = Customer::findAllCustomers($profile->id);
         </div>
 
         <div class="row">
-            <form method="POST" action="invoice.php">
+            <form method="POST" action="invoice.php" target="_blank">
 
 
                     <div class="form-group">
@@ -46,7 +46,11 @@ $customers = Customer::findAllCustomers($profile->id);
                     </div>
 
                     <div class="form-group">
+                        <label>Sposób płatności:</label>
                         <select name="payment">
+                            <option value="cash">Gotówka</option>
+                            <option value="card">Płatność kartą</option>
+                            <option value="7">Przelew - 7 dni</option>
                             <option value="14">Przelew - 14 dni</option>
                         </select>
                     </div>

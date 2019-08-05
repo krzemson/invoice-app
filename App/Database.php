@@ -42,13 +42,15 @@ class Database
             !(empty($type) || empty($values)) ? $stmt->bind_param($type, $values) : null;
         }
 
-        $this->confirm($stmt->execute());
+            $confirm = $this->confirm($stmt->execute());
 
-        $result = $stmt->get_result();
+            $result = $stmt->get_result();
+            $stmt->close();
 
-        $stmt->close();
+            if ($result == false)
+                return $confirm;
 
-        return $result;
+            return $result;
     }
 
     private function confirm($result)

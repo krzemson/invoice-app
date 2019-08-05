@@ -78,4 +78,5 @@ class Login
     {
         return ($obj->username == $this->username && password_verify($this->password, $obj->password)) ? true : false;
     }
+
 }

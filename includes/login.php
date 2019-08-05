@@ -2,6 +2,8 @@
 
 use App\Login;
 
+$session->isCookieValid();
+
 if ($session->isSigned()) {
     redirect('admin/index.php');
 } else {
@@ -16,8 +18,11 @@ if ($session->isSigned()) {
         if ($login->validate()) {
             if ($obj = $login->verify()) {
                 $session->login($obj);
+                if (isset($_POST['remember'])) {
+                    $session->rememberMe();
+                }
                 redirect('admin/index.php');
-            };
+            }
         }
     }
 }
@@ -42,7 +47,7 @@ if ($session->isSigned()) {
     <title>System Faktur</title>
 </head>
 <body>
-<h1>Zaloguj się</h1>
+<h1 class="text-center">Zaloguj się</h1>
 <div class="container">
         <form method="post">
             <div class="form-group">
@@ -73,8 +78,8 @@ if ($session->isSigned()) {
                 </div>
             </div>
             <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Zapamiętaj mnie</label>
+                <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                <label class="form-check-label" for="remember">Zapamiętaj mnie</label>
             </div>
             <button type="submit" class="btn btn-primary" name="submit">Zaloguj się</button>
         </form>

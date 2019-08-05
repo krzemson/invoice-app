@@ -33,6 +33,9 @@ abstract class Model
 
         $row = $result->fetch_assoc();
 
+        if ($row == null)
+            return false;
+
         $class = get_called_class();
 
         $object = new $class;
@@ -53,6 +56,9 @@ abstract class Model
         $result = static::$db->query($sql);
 
         $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+        if ($rows == null)
+            return false;
 
         $objectsArray = [];
 
@@ -106,9 +112,7 @@ abstract class Model
         $sql = "INSERT INTO ". static::$table ." (".implode(", ", array_keys($properties)).")";
         $sql .= " VALUES (".implode(", ", $signs).")";
 
-        static::$db->query($sql, $types, $params);
-
-        return true;
+        return static::$db->query($sql, $types, $params);
     }
 
     protected function update()
@@ -139,9 +143,7 @@ abstract class Model
 
         $types = implode("", $types);
 
-        static::$db->query($sql, $types, $params);
-
-        return true;
+        return static::$db->query($sql, $types, $params);
     }
 
     protected function properties()
