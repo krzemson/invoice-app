@@ -85,10 +85,10 @@ if (isset($_POST['submit'])) {
                     </div>
                 </form>
                     <?php if (isset($message)):?>
-                <div class="alert alert-success">
+                        <div class="alert alert-success">
 
                         <?php echo $message; ?>
-                </div>
+                        </div>
                     <?php endif; ?>
 
             </div>
