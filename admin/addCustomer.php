@@ -4,25 +4,24 @@ use App\Customer;
 include("../includes/header.php");
 
 $message = $session->get('success');
-
+$customer = new Customer();
 if (isset($_POST['submit'])) {
-    $customer = new Customer();
-
     $customer->user_id = $_SESSION['userId'];
-    $customer->name = $_POST['name'];
-    $customer->surname = $_POST['surname'];
-    $customer->company = $_POST['company'];
-    $customer->address = $_POST['address'];
-    $customer->city = $_POST['city'];
-    $customer->nip = $_POST['nip'];
-    $customer->regon = $_POST['regon'];
+    $customer->name = trim(htmlspecialchars($_POST['name']));
+    $customer->surname = trim(htmlspecialchars($_POST['surname']));
+    $customer->company = trim(htmlspecialchars($_POST['company']));
+    $customer->address = trim(htmlspecialchars($_POST['address']));
+    $customer->city = trim(htmlspecialchars($_POST['city']));
+    $customer->nip = trim(htmlspecialchars($_POST['nip']));
+    $customer->regon = trim(htmlspecialchars($_POST['regon']));
 
-    $customer->save();
+    if ($customer->validate()) {
+        $customer->save();
 
-    $session->flash('success', "Klient został dodany !");
+        $session->flash('success', "Klient został dodany !");
 
-
-    redirect("addCustomer.php");
+        redirect("addCustomer.php");
+    }
 
 }
 
@@ -51,42 +50,79 @@ if (isset($_POST['submit'])) {
                         <label>Imię:</label>
                         <input class="form-control" name="name" placeholder="Wprowadź imię" type="text">
                     </div>
+                    <?php if ($customer->has('name')) : ?>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <?php echo $customer->first('name');?>
+                        </div>
+                    <?php endif; ?>
                     <div class="form-group">
                         <label>Nazwisko:</label>
                         <input class="form-control" name="surname" placeholder="Wprowadź nazwisko" type="text">
                     </div>
+                    <?php if ($customer->has('surname')) : ?>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <?php echo $customer->first('surname');?>
+                        </div>
+                    <?php endif; ?>
                     <div class="form-group">
                         <label>Firma:</label>
                         <input class="form-control" name="company" placeholder="Wprowadź nazwę firmy" type="text">
                     </div>
-
+                    <?php if ($customer->has('company')) : ?>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <?php echo $customer->first('company');?>
+                        </div>
+                    <?php endif; ?>
                     <div class="form-group">
                         <label>Adres:</label>
                         <input class="form-control" name="address" placeholder="Wprowadź adres" type="text">
                     </div>
-
+                    <?php if ($customer->has('address')) : ?>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <?php echo $customer->first('address');?>
+                        </div>
+                    <?php endif; ?>
                     <div class="form-group">
                         <label>Miasto:</label>
                         <input class="form-control" name="city" placeholder="Wprowadź miasto" type="text">
                     </div>
-
+                    <?php if ($customer->has('city')) : ?>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <?php echo $customer->first('city');?>
+                        </div>
+                    <?php endif; ?>
                     <div class="form-group">
                         <label>NIP:</label>
                         <input class="form-control" name="nip" placeholder="Wprowadź NIP" type="text">
                     </div>
-
+                    <?php if ($customer->has('nip')) : ?>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <?php echo $customer->first('nip');?>
+                        </div>
+                    <?php endif; ?>
                     <div class="form-group">
                         <label>REGON:</label>
                         <input class="form-control" name="regon" placeholder="Wprowadź REGON" type="text">
                     </div>
-
+                    <?php if ($customer->has('regon')) : ?>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <?php echo $customer->first('regon');?>
+                        </div>
+                    <?php endif; ?>
                     <div class="form-group">
                         <input class="btn btn-primary" name="submit" type="submit" value="Dodaj klienta">
                     </div>
                 </form>
-                    <?php if (isset($message)):?>
-                        <div class="alert alert-success">
-
+                    <?php if (isset($message)) :?>
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <?php echo $message; ?>
                         </div>
                     <?php endif; ?>

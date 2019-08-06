@@ -18,7 +18,7 @@ if (!isset($_GET['inv_id'])) {
 
     try
     {
-        $mpdf = new \Mpdf\Mpdf(['tempDir' => '/tmp']);
+        $mpdf = new \Mpdf\Mpdf(['tempDir' => __DIR__ . '/tmp']);
 
         $html='
 

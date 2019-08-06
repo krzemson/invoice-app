@@ -43,7 +43,7 @@ class User extends Model
         } elseif (!preg_match('/^[a-ząćęłńóśźżA-ZĘÓĄŚŁŻŹĆŃ0-9\s]+$/', $this->company)) {
             $this->errors["company"][] = 'Wprowadzona nazwa firmy jest nieprawidłowa';
         } elseif (!preg_match('/^[a-ząćęłńóśźżA-ZĘÓĄŚŁŻŹĆŃ0-9\s]+$/', $this->city)) {
-            $this->errors["address"][] = 'Wprowadzony adres jest nieprawidłowy';
+            $this->errors["city"][] = 'Wprowadzone miasto jest nieprawidłowe';
         }
 
         return (empty($this->errors)) ? true : false;

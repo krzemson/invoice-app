@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
         $session->flash('success', "Profil został zaktualizowany !");
 
         redirect('profile.php');
-    };
+    }
 
 
 }
