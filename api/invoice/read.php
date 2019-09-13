@@ -35,8 +35,7 @@ if ($jwt) {
             "data" => $decoded->data
         )) . "\n";
 
-        if($invoices = Invoice::findAllInvoices($id)) {
-
+        if ($invoices = Invoice::findAllInvoices($id)) {
             // products array
             $invoice_arr = array();
             $invoice_arr["faktury"] = array();
@@ -57,7 +56,6 @@ if ($jwt) {
 
             echo json_encode($invoice_arr);
         } else {
-
             http_response_code(404);
 
             echo json_encode(
@@ -65,9 +63,7 @@ if ($jwt) {
             );
         }
 
-    } // if decode fails, it means jwt is invalid
-    catch (Exception $e) {
-
+    } catch (Exception $e) {
         // set response code
         http_response_code(401);
 
@@ -78,8 +74,7 @@ if ($jwt) {
         ));
     }
 
-}else {
-
+} else {
         // set response code
         http_response_code(401);
 

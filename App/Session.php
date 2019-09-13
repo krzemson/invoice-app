@@ -45,14 +45,12 @@ class Session
 
     public function user()
     {
-
         return User::findById($this->userId);
     }
 
     public function flash($status, $msg)
     {
         $_SESSION[$status] = $msg;
-
     }
 
     public function get($name)
@@ -86,7 +84,6 @@ class Session
             $this->userId = $_SESSION['userId'] = $userId;
             $this->signedIn = true;
         }
-
     }
 
     public function logout()
@@ -95,7 +92,7 @@ class Session
         unset($this->userId);
         if (isset($_COOKIE['rememberUserCookie'])) {
             unset($_COOKIE['rememberUserCookie']);
-            setcookie('rememberUserCookie',null, -1, "/");
+            setcookie('rememberUserCookie', null, -1, "/");
         }
         $this->signedIn = false;
         redirect("../index.php");

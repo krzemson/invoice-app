@@ -2,7 +2,6 @@
 
 namespace App;
 
-
 class API
 {
     private $invoice;
