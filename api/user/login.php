@@ -19,6 +19,10 @@ $client = new API();
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
 
+$username=isset($data->username) ? $data->username : "";
+$password=isset($data->password) ? $data->password : "";
+
+if ($username && $password) {
 // set product property values
 
     $username = $data->username;
@@ -37,7 +41,8 @@ $data = json_decode(file_get_contents("php://input"));
                     "id" => $user->id,
                     "username" => $user->username,
                     "name" => $user->name,
-                    "surname" => $user->surname
+                    "surname" => $user->surname,
+                    "email" => $user->email
                 )
             );
 
@@ -49,6 +54,11 @@ $data = json_decode(file_get_contents("php://input"));
             echo json_encode(
                 array(
                     "message" => "Successful login.",
+                    "id" => $user->id,
+                    "username" => $user->username,
+                    "name" => $user->name,
+                    "surname" => $user->surname,
+                    "email" => $user->email,
                     "jwt" => $jwt
                 )
             );
@@ -60,3 +70,10 @@ $data = json_decode(file_get_contents("php://input"));
             echo json_encode(array("message" => "Login failed."));
         }
     }
+} else {
+    // set response code
+    http_response_code(401);
+
+    // tell the user access denied
+    echo json_encode(array("message" => "Access denied."));
+}

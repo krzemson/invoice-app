@@ -16,24 +16,23 @@ include_once '../user/core.php';
 
 $data = json_decode(file_get_contents("php://input"));
 
-$id = $data->id;
 // get jwt
 $jwt=isset($data->jwt) ? $data->jwt : "";
-
 
 if ($jwt) {
     try {
         // decode jwt
         $decoded = JWT::decode($jwt, $key, array('HS256'));
 
+        $id = $decoded->data->id;
         // set response code
         http_response_code(200);
 
         // show user details
-        echo json_encode(array(
+        /*echo json_encode(array(
             "message" => "Access granted.",
             "data" => $decoded->data
-        )) . "\n";
+        )) . "\n";*/
 
         if ($invoices = Invoice::findAllInvoices($id)) {
             // products array
@@ -44,6 +43,8 @@ if ($jwt) {
                 $invoice_item=array(
                     "id" => $invoice->id,
                     "nr_faktury" => $invoice->invnum,
+                    "klient" => $invoice->customer()->company,
+                    "vat" => $invoice->tax_value,
                     "wartosc_brutto" => $invoice->gross_value,
                     "wartosc_netto" => $invoice->net_value,
                     "termin" => $invoice->term_payment
@@ -80,6 +81,4 @@ if ($jwt) {
 
         // tell the user access denied
         echo json_encode(array("message" => "Access denied."));
-
-
 }
