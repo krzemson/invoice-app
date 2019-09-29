@@ -95,6 +95,6 @@ class Session
             setcookie('rememberUserCookie', null, -1, "/");
         }
         $this->signedIn = false;
-        redirect("../index.php");
+        redirect("../");
     }
 }

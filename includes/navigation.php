@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">System Faktur</a>
+        <a class="navbar-brand" href="/admin">System Faktur</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -127,7 +127,7 @@
                 <i class="fa fa-user fa-fw"></i> <?php echo $profile->name." ". $profile->surname ?> <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="/admin/profile.php"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                <li><a href="/admin/profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
                 </li>
                 <li class="divider"></li>
                 <li><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -154,17 +154,17 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/admin/index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Klienci<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/admin/customers.php">Wszyscy klienci</a>
+                            <a href="/admin/customers">Wszyscy klienci</a>
                         </li>
 
                         <li>
-                            <a href="/admin/addCustomer.php">Dodaj klienta</a>
+                            <a href="/admin//add/customer">Dodaj klienta</a>
                         </li>
 
                     </ul>
@@ -178,10 +178,10 @@
                             <a href="#">Faktury sprzedaży <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li>
-                                    <a href="/admin/invoices.php">Wszystkie faktury sprzedaży</a>
+                                    <a href="/admin/invoices">Wszystkie faktury sprzedaży</a>
                                 </li>
                                 <li>
-                                    <a href="/admin/addInvoice.php">Wystaw fakturę sprzedaży</a>
+                                    <a href="/admin/add/invoice">Wystaw fakturę sprzedaży</a>
                                 </li>
                             </ul>
                         </li>

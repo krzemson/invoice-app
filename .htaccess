@@ -1,0 +1,45 @@
+RewriteEngine On
+RewriteCond %{HTTP:Authorization} ^(.+)$
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+IndexIgnore * # prevent directory listing
+
+Order deny,allow
+Allow from *
+
+# ------------------------------------------
+# Rewrite so that php extentions are not shown
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+
+RewriteEngine on
+RewriteRule ^/ /index.php [NC,L,QSA]
+
+RewriteEngine on
+RewriteRule ^customers /admin/customers.php [NC,L,QSA]
+
+RewriteEngine on
+RewriteRule ^invoices /admin/invoices.php [NC,L,QSA]
+
+RewriteEngine on
+RewriteRule ^profile /admin/profile.php [NC,L,QSA]
+
+RewriteEngine on
+RewriteRule ^admin/add/invoice /admin/addInvoice.php [NC,L,QSA]
+
+RewriteEngine on
+RewriteRule ^admin/add/customer /admin/addCustomer.php [NC,L,QSA]
+
+RewriteEngine on
+RewriteRule ^admin/customer/(.*)$ /admin/editCustomer.php?id=$1 [NC,L,QSA]
+
+RewriteEngine on
+RewriteRule ^api/invoice/delete/(.*)$ api/invoice/delete.php?id=$1 [NC,L,QSA]
+
+RewriteEngine on
+RewriteRule ^api/user/login api/user/login.php [NC,L,QSA]
+
