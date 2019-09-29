@@ -25,7 +25,7 @@ class Invoice extends Model
     public $date_service;
     public $invtype = "FV-";
 
-    public function setInvNum ()
+    public function setInvNum()
     {
         $sql = "SELECT MAX(id) FROM invoices";
 
@@ -40,7 +40,6 @@ class Invoice extends Model
         $invnum = $this->invtype. $number."/".$date;
 
         $this->invnum = $invnum;
-
     }
 
     public function setPayment($payment)

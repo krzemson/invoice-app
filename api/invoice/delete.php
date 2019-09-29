@@ -54,7 +54,7 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) & !empty($_GET["id"])) {
 
 }
 
-/*
+
 // get product id
 $data = json_decode(file_get_contents("php://input"));
 // delete the product
@@ -91,4 +91,4 @@ if (!$invoice) {
         echo json_encode(array("message" => "Unable to delete invoice."));
     }
 }
-*/
+

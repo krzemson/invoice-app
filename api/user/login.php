@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 require "../../vendor/autoload.php";
 require_once('../../config/config.php');
-require_once('../../includes/functions.php');
+
 require_once("../../autoload.php");
 include_once 'core.php';
 

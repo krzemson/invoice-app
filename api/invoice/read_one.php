@@ -33,9 +33,7 @@ if($invoice->id != null){
 
     // make it json format
     echo json_encode($product_arr);
-}
-
-else{
+} else {
     // set response code - 404 Not found
     http_response_code(404);
 
