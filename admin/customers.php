@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
                             <td><?php echo $customer->city; ?></td>
                             <td><?php echo $customer->nip; ?></td>
                             <td><?php echo $customer->regon; ?></td>
-                            <td align="center"><a href="editCustomer.php?id=<?php echo $customer->id; ?>" class="btn btn-primary">Edytuj</a></td>
+                            <td align="center"><a href="customer/<?php echo $customer->id; ?>" class="btn btn-primary">Edytuj</a></td>
                             <td align="center">
                                 <form action="" method="post">
                                     <input type="hidden" value="<?php echo $customer->id; ?>" name="id">

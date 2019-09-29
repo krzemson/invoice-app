@@ -1,6 +1,7 @@
 <?php
 
 use App\Invoice;
+use \Firebase\JWT\JWT;
 
 
 // required headers
@@ -14,12 +15,53 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 require_once('../../config/config.php');
 require_once('../../includes/functions.php');
 require_once("../../autoload.php");
+require "../../vendor/autoload.php";
+include_once '../user/core.php';
 
+
+if (isset($_SERVER["HTTP_AUTHORIZATION"]) & !empty($_GET["id"])) {
+    $auth = $_SERVER["HTTP_AUTHORIZATION"];
+    $id = $_GET["id"];
+
+
+        try {
+            // decode jwt
+            $decoded = JWT::decode($auth, $key, array('HS256'));
+
+            var_dump($_SERVER["REQUEST_METHOD"]);
+
+            echo intval($_GET["id"]);
+
+            // set response code
+            http_response_code(200);
+
+        } catch (Exception $e) {
+            // set response code
+            http_response_code(401);
+
+            // tell the user access denied  & show error message
+            echo json_encode(array(
+                "message" => "Access denied.",
+                "error" => $e->getMessage()
+            ));
+        }
+} else {
+
+    http_response_code(404);
+
+    // tell the user product does not exist
+    echo json_encode(array("message" => "Invoice id and auth token are empty"));
+
+}
+
+/*
 // get product id
 $data = json_decode(file_get_contents("php://input"));
 // delete the product
 
 $id = $data->id;
+
+
 
 $invoice = Invoice::findById($id);
 
@@ -49,4 +91,4 @@ if (!$invoice) {
         echo json_encode(array("message" => "Unable to delete invoice."));
     }
 }
-
+*/

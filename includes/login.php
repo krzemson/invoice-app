@@ -5,7 +5,7 @@ use App\Login;
 $session->isCookieValid();
 
 if ($session->isSigned()) {
-    redirect('admin/index.php');
+    redirect('/admin');
 } else {
     $login = new Login();
 
@@ -21,7 +21,7 @@ if ($session->isSigned()) {
                 if (isset($_POST['remember'])) {
                     $session->rememberMe();
                 }
-                redirect('admin/index.php');
+                redirect('/admin');
             }
         }
     }
