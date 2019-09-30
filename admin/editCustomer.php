@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
 
         $session->flash('success', "Klient zaktualizowany !");
 
-        redirect('editCustomer.php?id='.$_GET['id']);
+        redirect($_GET['id']);
     }
 }
 

@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
 
         $session->flash('success', "Klient został dodany !");
 
-        redirect("addCustomer.php");
+        redirect("customer");
     }
 
 }

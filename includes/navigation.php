@@ -164,7 +164,7 @@
                         </li>
 
                         <li>
-                            <a href="/admin//add/customer">Dodaj klienta</a>
+                            <a href="/admin/add/customer">Dodaj klienta</a>
                         </li>
 
                     </ul>

@@ -11,7 +11,7 @@ $i= 1;
 if (isset($_POST['submit'])) {
     Invoice::deleteInvoice($_POST['id']);
 
-    redirect('invoices.php');
+    redirect('invoices');
 }
 
 ?>
@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Klienci</h1>
+                <h1 class="page-header">Faktury Sprzedaży</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -68,7 +68,7 @@ if (isset($_POST['submit'])) {
                             <td><?php echo $invoice->term_payment; ?></td>
                             <td><?php echo $invoice->date_issue; ?></td>
                             <td><?php echo $invoice->date_service; ?></td>
-                            <td align="center"><a href="invoice.php?inv_id=<?php echo $invoice->id; ?>" class="btn btn-primary" target="_blank">Podgląd</a></td>
+                            <td align="center"><a href="invoice/<?php echo $invoice->id; ?>" class="btn btn-primary" target="_blank">Podgląd</a></td>
                             <td align="center">
                                 <form action="" method="post">
                                     <input type="hidden" value="<?php echo $invoice->id; ?>" name="id">

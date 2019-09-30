@@ -7,8 +7,9 @@ use App\Service;
 require_once("../init.php");
 require_once '../vendor/autoload.php';
 
-if (!isset($_GET['inv_id'])) {
-    redirect('../index.php');
+if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
+    redirect('/admin');
+
 } elseif (isset($_GET['inv_id'])) {
     $inv_id = $_GET['inv_id'];
     $invoice = Invoice::findById($inv_id);

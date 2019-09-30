@@ -24,7 +24,7 @@ $customers = Customer::findAllCustomers($profile->id);
         </div>
 
         <div class="row">
-            <form method="POST" action="invoice.php" target="_blank">
+            <form method="POST" action="/admin/invoice" target="_blank">
 
 
                     <div class="form-group">

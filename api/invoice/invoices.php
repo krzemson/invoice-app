@@ -77,31 +77,40 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) & !empty($_SERVER["HTTP_AUTHORIZATION"
             $product_id=intval($_GET["product_id"]);
             break;
         case 'DELETE':
+
+            if (isset($_GET["id"])) {
                 $id = intval($_GET["id"]);
 
-            try {
-                // decode jwt
-                if ($id !== 0) {
-                    $decoded = JWT::decode($auth, $key, array('HS256'));
+                try {
+                    // decode jwt
+                    if ($id !== 0) {
+                        $decoded = JWT::decode($auth, $key, array('HS256'));
 
-                    $api->deleteInvoice($id);
-                } else {
-                    http_response_code(404);
+                        $api->deleteInvoice($id);
+                    } else {
+                        http_response_code(404);
 
-                    // tell the user product does not exist
-                    echo json_encode(array("message" => "Invoice does not exist."));
+                        // tell the user product does not exist
+                        echo json_encode(array("message" => "Invoice does not exist."));
+                    }
+
+                } catch (Exception $e) {
+                    // set response code
+                    http_response_code(401);
+
+                    // tell the user access denied  & show error message
+                    echo json_encode(array(
+                        "message" => "Access denied.",
+                        "error" => $e->getMessage()
+                    ));
                 }
+            } else {
+                http_response_code(404);
 
-            } catch (Exception $e) {
-                // set response code
-                http_response_code(401);
-
-                // tell the user access denied  & show error message
-                echo json_encode(array(
-                    "message" => "Access denied.",
-                    "error" => $e->getMessage()
-                ));
+                // tell the user product does not exist
+                echo json_encode(array("message" => "Invoice does not exist."));
             }
+
 
             break;
         default:
