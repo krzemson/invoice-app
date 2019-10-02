@@ -32,11 +32,33 @@ class Service extends Model
 
     public function setTaxValue()
     {
-        $this->taxv = bcmul($this->netv, $this->tax,2);
+        $this->taxv = bcmul($this->netv, $this->tax, 2);
     }
 
     public function setGrossValue()
     {
         $this->gross = bcadd($this->netv, $this->taxv, 2);
+    }
+
+    public static function findAllServicesForAllUserServices($user_id)
+    {
+        static::$db = Database::getInstance();
+
+        $sql = "SELECT * FROM ". self::$table ." WHERE invoice_id in (SELECT id FROM invoices WHERE user_id = $user_id)";
+
+        $result = self::$db->query($sql);
+
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+        //if ($rows == null)
+            //return false;
+
+        $objectsArray = [];
+
+        foreach ($rows as $row) {
+            $objectsArray[] = static::instance($row);
+        }
+
+        return $objectsArray;
     }
 }

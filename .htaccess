@@ -18,6 +18,9 @@ RewriteEngine on
 RewriteRule ^admin/customers$ /admin/customers.php [NC,L,QSA]
 
 RewriteEngine on
+RewriteRule ^admin/logout$ /admin/logout.php [NC,L,QSA]
+
+RewriteEngine on
 RewriteRule ^admin/invoices$ /admin/invoices.php [NC,L,QSA]
 
 RewriteEngine on
@@ -36,13 +39,24 @@ RewriteEngine on
 RewriteRule ^admin/add/customer$ /admin/addCustomer.php [NC,L,QSA]
 
 RewriteEngine on
+RewriteRule ^register$ /includes/register.php [NC,L,QSA]
+
+RewriteEngine on
 RewriteRule ^admin/customer/([0-9]+)/?$ /admin/editCustomer.php?id=$1 [NC,L,QSA]
 
 #API
+
+#INVOICE
 RewriteEngine On
 RewriteRule ^api/invoices?$ api/invoice/invoices.php [NC,L]
 RewriteRule ^api/invoices/([0-9]+)/?$ api/invoice/invoices.php?id=$1 [NC,L]
 
+#CUSTOMER
+
+RewriteRule ^api/customers?$ api/customer/customers.php [NC,L]
+RewriteRule ^api/customers/([0-9]+)/?$ api/customer/customers.php?id=$1 [NC,L]
+
+#LOGIN
 RewriteEngine on
 RewriteRule ^api/login api/user/login.php [NC,L,QSA]
 

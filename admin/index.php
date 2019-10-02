@@ -20,9 +20,7 @@ include("../includes/header.php");
         </div>
 
         <div class="row">
-            <?php
-
-            ?>
+            <div id="piechart" style="width: 1100px; height: 700px; margin: 0 auto;"></div>
         </div>
 
 

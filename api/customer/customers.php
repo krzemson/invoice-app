@@ -12,7 +12,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 require "../../vendor/autoload.php";
 require_once('../../config/config.php');
-require_once('../../includes/functions.php');
+
 require_once("../../autoload.php");
 include_once '../user/core.php';
 
@@ -32,7 +32,7 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) & !empty($_SERVER["HTTP_AUTHORIZATION"
                     if ($id !== 0) {
                         $decoded = JWT::decode($auth, $key, array('HS256'));
 
-                        $api->oneInvoice($id);
+                        $api->oneCustomer($id);
                     } else {
                         http_response_code(404);
 
@@ -57,7 +57,7 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) & !empty($_SERVER["HTTP_AUTHORIZATION"
 
                     $id = $decoded->data->id;
 
-                    $api->allInvoices($id);
+                    $api->allCustomers($id);
 
                 } catch (Exception $e) {
                     // set response code
@@ -72,26 +72,6 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) & !empty($_SERVER["HTTP_AUTHORIZATION"
             }
             break;
         case 'POST':
-            try {
-                // decode jwt
-                $decoded = JWT::decode($auth, $key, array('HS256'));
-
-                $data = json_decode(file_get_contents("php://input"));
-
-               //var_dump($data);
-
-                $api->createInvoice($data);
-
-            } catch (Exception $e) {
-                // set response code
-                http_response_code(401);
-
-                // tell the user access denied  & show error message
-                echo json_encode(array(
-                    "message" => "Access denied.",
-                    "error" => $e->getMessage()
-                ));
-            }
             break;
         case 'PUT':
             if (isset($_GET["id"])) {
@@ -132,7 +112,6 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) & !empty($_SERVER["HTTP_AUTHORIZATION"
             }
             break;
         case 'DELETE':
-
             if (isset($_GET["id"])) {
                 $id = intval($_GET["id"]);
 
@@ -180,4 +159,3 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) & !empty($_SERVER["HTTP_AUTHORIZATION"
     echo json_encode(array("message" => "Auth token is empty"));
 
 }
-

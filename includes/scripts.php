@@ -1,3 +1,11 @@
+<?php
+
+$invoices = count(\App\Invoice::findAllInvoices($profile->id));
+$customers = count(\App\Customer::findAllCustomers($profile->id));
+$services = count(\App\Service::findAllServicesForAllUserServices($profile->id));
+
+?>
+
 <!-- jQuery -->
 <script src="/../js/jquery.min.js"></script>
 
@@ -9,8 +17,31 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/../js/sb-admin-2.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
 
-<script>
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Count'],
+            ['Faktury Sprzedaży',     <?php echo $invoices ?>],
+            ['Pozycje na fakturze sprzedaży',      <?php echo $services ?>],
+            ['Klienci',  <?php echo $customers ?>],
+            ['Faktury Zakupu',  5],
+            ['Pozycje na fakturze zakupu',  6],
+            ['Dostawcy',  3]
+        ]);
+
+        var options = {
+            title: 'Statystyki księgowości'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+
     function isNumber(evt) {
         evt = (evt) ? evt : window.event;
         var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -30,7 +61,7 @@
                 "                                    <td><input class=\"form-control\" name=\"service[]\" type=\"text\"></td>\n" +
                 "                                    <td><input id=\"quantity"+c+"\" class=\"form-control\" name=\"quantity[]\" type=\"text\" onkeypress=\"return isNumber(event)\" value=\"1\"></td>\n" +
                 "                                    <td>\n" +
-                "                                        <select name=\"jm\" id=\"\">\n" +
+                "                                        <select class=\"form-control\" name=\"jm\" id=\"\">\n" +
                 "                                            <option value=\"szt\">szt</option>\n" +
                 "                                        </select>\n" +
                 "                                    </td>\n" +
@@ -38,7 +69,7 @@
                 "                                    <td>\n" +
                 "                                        <input id=\"netv"+c+"\" class=\"form-control\" name=\"netvalue[]\" type=\"text\" disabled>\n" +
                 "                                    </td>\n" +
-                "                                    <td><select name=\"tax\" id=\"\">\n" +
+                "                                    <td><select class=\"form-control\" name=\"tax\" id=\"\">\n" +
                 "                                            <option value=\"0.23\">23%</option>\n" +
                 "                                        </select></td>\n" +
                 "                                    <td><input id=\"tax"+c+"\" class=\"form-control\" name=\"taxvalue[]\" type=\"text\" disabled></td>\n" +

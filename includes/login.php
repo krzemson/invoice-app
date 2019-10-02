@@ -51,12 +51,12 @@ if ($session->isSigned()) {
 <div class="container">
         <form method="post">
             <div class="form-group">
-                <label for="exampleInputEmail1">Username</label>
+                <label for="exampleInputLogin">Login</label>
                 <input
                         type="text"
                         class="form-control <?php  echo $login->has('username') ? ' is-invalid' : '' ?>"
                         name="username"
-                        placeholder="Enter username"
+                        placeholder="Wpisz login"
                 >
 
                 <div class="invalid-feedback">
@@ -65,12 +65,12 @@ if ($session->isSigned()) {
 
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
+                <label for="exampleInputPassword1">Hasło</label>
                 <input
                         type="password"
                         class="form-control <?php  echo $login->has('password') ? ' is-invalid' : '' ?>"
                         name="password"
-                        placeholder="Password"
+                        placeholder="Wpisz hasło"
                 >
 
                 <div class="invalid-feedback">
@@ -80,6 +80,9 @@ if ($session->isSigned()) {
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="remember" name="remember">
                 <label class="form-check-label" for="remember">Zapamiętaj mnie</label>
+            </div>
+            <div class="form-group">
+                Nie masz jeszcze konta ? <a href="/register">Zarejestruj się !</a>
             </div>
             <button type="submit" class="btn btn-primary" name="submit">Zaloguj się</button>
         </form>

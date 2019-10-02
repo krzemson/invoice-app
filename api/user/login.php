@@ -42,7 +42,12 @@ if ($username && $password) {
                     "username" => $user->username,
                     "name" => $user->name,
                     "surname" => $user->surname,
-                    "email" => $user->email
+                    "email" => $user->email,
+                    "company" => $user->company,
+                    "address" => $user->address,
+                    "city" => $user->city,
+                    "nip" => $user->nip,
+                    "regon" => $user->regon
                 )
             );
 
@@ -59,6 +64,11 @@ if ($username && $password) {
                     "name" => $user->name,
                     "surname" => $user->surname,
                     "email" => $user->email,
+                    "company" => $user->company,
+                    "address" => $user->address,
+                    "city" => $user->city,
+                    "nip" => $user->nip,
+                    "regon" => $user->regon,
                     "jwt" => $jwt
                 )
             );

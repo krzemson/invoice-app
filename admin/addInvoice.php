@@ -29,9 +29,8 @@ $customers = Customer::findAllCustomers($profile->id);
 
                     <div class="form-group">
                         <label>Klient:</label>
-                        <select name="customer">
-                            <?php foreach ($customers as $customer):?>
-
+                        <select class="form-control" name="customer">
+                            <?php foreach ($customers as $customer) :?>
                                 <option value="<?php echo $customer->id ?>"><?php echo $customer->name . " " . $customer->surname . " - " . $customer->company ?></option>
                             <?php endforeach; ?>
                         </select>
@@ -47,7 +46,7 @@ $customers = Customer::findAllCustomers($profile->id);
 
                     <div class="form-group">
                         <label>Sposób płatności:</label>
-                        <select name="payment">
+                        <select class="form-control" name="payment">
                             <option value="cash">Gotówka</option>
                             <option value="card">Płatność kartą</option>
                             <option value="7">Przelew - 7 dni</option>
@@ -78,7 +77,7 @@ $customers = Customer::findAllCustomers($profile->id);
                                     <td><input class="form-control" name="service[]" type="text"></td>
                                     <td><input id="quantity" class="form-control" name="quantity[]" type="text" onkeypress="return isNumber(event)" value="1"></td>
                                     <td>
-                                        <select name="jm" id="">
+                                        <select class="form-control" name="jm" id="">
                                             <option value="szt">szt</option>
                                         </select>
                                     </td>
@@ -86,7 +85,7 @@ $customers = Customer::findAllCustomers($profile->id);
                                     <td>
                                         <input id="netv" class="form-control" type="text" disabled>
                                     </td>
-                                    <td><select name="tax" id="">
+                                    <td><select class="form-control" name="tax" id="">
                                             <option value="0.23">23%</option>
                                         </select></td>
                                     <td><input id="tax" class="form-control" type="text" disabled></td>
@@ -98,7 +97,7 @@ $customers = Customer::findAllCustomers($profile->id);
 
                         </table>
 
-                        <button type="button" class="btn btn-success" id="add_row">Dodaj produkt/usługę</button>
+                        <button type="button" class="btn btn-success" id="add_row" style="margin-bottom: 1.2rem">Dodaj produkt/usługę</button>
 
                         <div class="form-group">
                             <input class="btn btn-primary" name="submit" type="submit" value="Dodaj fakturę">

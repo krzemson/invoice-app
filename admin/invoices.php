@@ -4,7 +4,7 @@ use App\Invoice;
 
 include("../includes/header.php");
 
-$invoices = Invoice::findAllInvoices($_SESSION['userId']);
+$invoices = Invoice::findAllInvoices($profile->id);
 
 $i= 1;
 
@@ -51,6 +51,7 @@ if (isset($_POST['submit'])) {
                             <th>Termin płatności</th>
                             <th>Data faktury</th>
                             <th>Data usługi</th>
+                            <th class="text-center">Podgląd</th>
                             <th class="text-center">Edytuj</th>
                             <th class="text-center">Usuń</th>
                         </tr>
@@ -69,6 +70,7 @@ if (isset($_POST['submit'])) {
                             <td><?php echo $invoice->date_issue; ?></td>
                             <td><?php echo $invoice->date_service; ?></td>
                             <td align="center"><a href="invoice/<?php echo $invoice->id; ?>" class="btn btn-primary" target="_blank">Podgląd</a></td>
+                            <td align="center"><a href="edit/invoice/<?php echo $invoice->id; ?>" class="btn btn-warning" target="_blank">Edytuj</a></td>
                             <td align="center">
                                 <form action="" method="post">
                                     <input type="hidden" value="<?php echo $invoice->id; ?>" name="id">

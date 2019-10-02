@@ -19,7 +19,7 @@ if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
 
     try
     {
-        $mpdf = new \Mpdf\Mpdf(['tempDir' => '/tmp']);
+        $mpdf = new \Mpdf\Mpdf(['tempDir' => __DIR__.'/tmp']);
 
         $html='
 
@@ -101,7 +101,7 @@ if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
 
 <body>
     <div>
-        <div class="boxes left"><img src=""></div>
+        <!--<div class="boxes left"><img src=""></div>-->
             <div class="boxes right">
                 <div class="text-center">
                     Faktura
@@ -288,7 +288,7 @@ if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
 
     try
     {
-        $mpdf = new \Mpdf\Mpdf(['tempDir' => '/tmp']);
+        $mpdf = new \Mpdf\Mpdf(['tempDir' => __DIR__.'/tmp']);
 
         $html='
 
@@ -370,7 +370,7 @@ if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
 
 <body>
     <div>
-        <div class="boxes left"><img src=""></div>
+        <!--<div class="boxes left"><img src=""></div>-->
             <div class="boxes right">
                 <div class="text-center">
                     Faktura

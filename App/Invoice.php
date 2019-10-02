@@ -81,8 +81,8 @@ class Invoice extends Model
 
         $rows = $result->fetch_all(MYSQLI_ASSOC);
 
-        if ($rows == null)
-            return false;
+        //if ($rows == null)
+            //return false;
 
         $objectsArray = [];
 
