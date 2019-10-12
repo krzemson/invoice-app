@@ -92,10 +92,10 @@
                             <a href="#">Faktury zakupu <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li>
-                                    <a href="#">Wszystkie faktury zakupu</a>
+                                    <a href="/admin/purchase">Wszystkie faktury zakupu</a>
                                 </li>
                                 <li>
-                                    <a href="#">Wprowadź fakturę zakupu</a>
+                                    <a href="/admin/add/purchase">Wprowadź fakturę zakupu</a>
                                 </li>
                             </ul>
                         </li>

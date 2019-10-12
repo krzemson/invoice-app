@@ -1,8 +1,8 @@
 <?php
 
-use App\Customer;
-use App\Invoice;
-use App\Service;
+use App\Supplier;
+use App\InvoiceP;
+use App\ServiceP;
 
 require_once("../init.php");
 require_once '../vendor/autoload.php';
@@ -12,8 +12,8 @@ if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
 
 } elseif (isset($_GET['inv_id'])) {
     $inv_id = $_GET['inv_id'];
-    $invoice = Invoice::findById($inv_id);
-    $customer = $invoice->customer();
+    $invoice = InvoiceP::findById($inv_id);
+    $supplier = $invoice->supplier();
     $profile = $invoice->profile();
     $services = $invoice->services();
 
@@ -104,7 +104,7 @@ if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
         <!--<div class="boxes left"><img src=""></div>-->
             <div class="boxes right">
                 <div class="text-center">
-                    Faktura Sprzedaży
+                    Faktura Zakupu
                 </div>
                 <div class="number text-center">
                     '.$invoice->invnum.'
@@ -120,17 +120,17 @@ if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
 
 
     <div>
-        <div class="boxes padding left middle">
-            <div><strong>Nabywca</strong></div>
-            <hr>
-            <div>'.$customer->company.'</div>
-            <div>'.$customer->address.'</div>
-            <div>'.$customer->city.'</div>
-            <div>'.$customer->nip.'</div>
-            <div>'.$customer->regon.'</div>
-        </div>
         <div class="boxes padding right middle">
             <div><strong>Sprzedawca</strong></div>
+            <hr>
+            <div>'.$supplier->company.'</div>
+            <div>'.$supplier->address.'</div>
+            <div>'.$supplier->city.'</div>
+            <div>'.$supplier->nip.'</div>
+            <div>'.$supplier->regon.'</div>
+        </div>
+        <div class="boxes padding left middle">
+            <div><strong>Nabywca</strong></div>
             <hr>
             <div>'.$profile->company.'</div>
             <div>'.$profile->address.'</div>
@@ -239,12 +239,12 @@ if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
     }
 } else {
     $profile = $session->user();
-    $customer = Customer::findById($_POST['customer']);
+    $supplier = supplier::findById($_POST['supplier']);
 
-    $invoice = new Invoice();
+    $invoice = new InvoiceP();
 
     $invoice->user_id = $_SESSION['userId'];
-    $invoice->customer_id = $_POST['customer'];
+    $invoice->supplier_id = $_POST['supplier'];
     $invoice->date_issue = $_POST['dateiss'];
     $invoice->date_service = $_POST['dateser'];
     $invoice->setInvNum();
@@ -263,7 +263,7 @@ if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
     $services = [];
 
     for ($i = 0; $i < count($_POST['service']); $i++) {
-        $service = new Service();
+        $service = new ServiceP();
 
         $service->invoice_id = $invoiceId;
         $service->service = $_POST['service'][$i];
@@ -286,7 +286,7 @@ if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
     $invoice->inwords = kwotaslownie($invoice->gross_value);
     $invoice->save();
 
-    $session->flash('success', "Faktura sprzedaży została dodana !");
+    $session->flash('success', "Faktura zakupu została dodana !");
 
     try
     {
@@ -375,7 +375,7 @@ if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
         <!--<div class="boxes left"><img src=""></div>-->
             <div class="boxes right">
                 <div class="text-center">
-                    Faktura Sprzedaży
+                    Faktura Zakupu
                 </div>
                 <div class="number text-center">
                     '.$invoice->invnum.'
@@ -391,17 +391,17 @@ if (!isset($_POST['submit']) & !isset($_GET['inv_id'])) {
 
 
     <div>
-        <div class="boxes padding left middle">
-            <div><strong>Nabywca</strong></div>
-            <hr>
-            <div>'.$customer->company.'</div>
-            <div>'.$customer->address.'</div>
-            <div>'.$customer->city.'</div>
-            <div>'.$customer->nip.'</div>
-            <div>'.$customer->regon.'</div>
-        </div>
         <div class="boxes padding right middle">
             <div><strong>Sprzedawca</strong></div>
+            <hr>
+            <div>'.$supplier->company.'</div>
+            <div>'.$supplier->address.'</div>
+            <div>'.$supplier->city.'</div>
+            <div>'.$supplier->nip.'</div>
+            <div>'.$supplier->regon.'</div>
+        </div>
+        <div class="boxes padding left middle">
+            <div><strong>Nabywca</strong></div>
             <hr>
             <div>'.$profile->company.'</div>
             <div>'.$profile->address.'</div>

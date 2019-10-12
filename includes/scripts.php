@@ -1,9 +1,15 @@
 <?php
 
 $invoices = count(\App\Invoice::findAllInvoices($profile->id));
+$invoicesP = count(\App\InvoiceP::findAllInvoices($profile->id));
 $customers = count(\App\Customer::findAllCustomers($profile->id));
+$suppliers = count(\App\Supplier::findAllSuppliers($profile->id));
 $services = count(\App\Service::findAllServicesForAllUserServices($profile->id));
+$servicesP = count(\App\ServiceP::findAllServicesForAllUserServices($profile->id));
 
+//$lines = count($data->lines);
+
+isset($data) ? $lines = count($data->lines) : $lines = 1;
 ?>
 
 <!-- jQuery -->
@@ -28,9 +34,9 @@ $services = count(\App\Service::findAllServicesForAllUserServices($profile->id))
             ['Faktury Sprzedaży',     <?php echo $invoices ?>],
             ['Pozycje na fakturze sprzedaży',      <?php echo $services ?>],
             ['Klienci',  <?php echo $customers ?>],
-            ['Faktury Zakupu',  5],
-            ['Pozycje na fakturze zakupu',  6],
-            ['Dostawcy',  3]
+            ['Faktury Zakupu',  <?php echo $invoicesP ?>],
+            ['Pozycje na fakturze zakupu',  <?php echo $servicesP ?>],
+            ['Dostawcy',  <?php echo $suppliers ?>]
         ]);
 
         var options = {
@@ -82,7 +88,7 @@ $services = count(\App\Service::findAllServicesForAllUserServices($profile->id))
                 return i;
             }
 
-            for (var i = 2; i <= c; i++) {
+            for (var i = 1; i <= c; i++) {
                 let x = i;
 
                 $(document).on("keyup", "#net"+x, function () {
@@ -114,6 +120,30 @@ $services = count(\App\Service::findAllServicesForAllUserServices($profile->id))
 
             });
 
+
+        function myF (i) {
+            return i;
+        }
+
+        for (var i = 1; i <= <?php echo $lines ?>; i++) {
+            let x = i;
+
+            $(document).on("keyup", "#net"+x, function () {
+                let n = myF(x);
+
+                $("#netv"+n).val(($(this).val() * $("#quantity"+n).val()).toFixed(2));
+                $("#tax"+n).val(($("#netv"+n).val() * 0.23).toFixed(2));
+                $("#gross"+n).val(($("#netv"+n).val() * 1.23).toFixed(2));
+            });
+
+            $(document).on("keyup", "#quantity"+x, function () {
+                let n = myF(x);
+
+                $("#netv"+n).val(($(this).val() * $("#net"+n).val()).toFixed(2));
+                $("#tax"+n).val(($("#netv"+n).val() * 0.23).toFixed(2));
+                $("#gross"+n).val(($("#netv"+n).val() * 1.23).toFixed(2));
+            });
+        }
 
 
             $('#net').keyup(function () {

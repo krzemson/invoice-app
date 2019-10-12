@@ -6,6 +6,8 @@ include("../includes/header.php");
 
 $customers = Customer::findAllCustomers($profile->id);
 
+$message = $session->get('success');
+
 ?>
 
     <body>
@@ -18,13 +20,15 @@ $customers = Customer::findAllCustomers($profile->id);
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Dodaj fakturę</h1>
+                <h1 class="page-header">Dodaj fakturę sprzedaży</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
 
         <div class="row">
-            <form method="POST" action="/admin/invoice" target="_blank">
+            <form method="POST" action="/admin/invoice" target="_blank" onSubmit="setTimeout(function(){
+    window.location.reload();
+},500);">
 
 
                     <div class="form-group">
@@ -105,6 +109,13 @@ $customers = Customer::findAllCustomers($profile->id);
 
 
             </form>
+
+            <?php if (isset($message)) :?>
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <?php echo $message; ?>
+                </div>
+            <?php endif; ?>
 
         </div>
 

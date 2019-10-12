@@ -11,7 +11,7 @@ $i= 1;
 if (isset($_POST['submit'])) {
     Customer::deleteCustomer($_POST['id']);
 
-    redirect('customers.php');
+    redirect('/admin/customers');
 }
 
 
