@@ -1,5 +1,38 @@
 <?php
 require_once('../init.php');
+
+use App\Register;
+
+$session->isCookieValid();
+
+if ($session->isSigned()) {
+    redirect('/admin');
+} else {
+
+    $message = $session->get('success');
+
+    $register = new Register();
+
+    if (isset($_POST['submit'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $email = $_POST['email'];
+        $name = $_POST['name'];
+        $surname = $_POST['surname'];
+
+        $register->setDataRegister($username, $password, $email, $name, $surname);
+
+        if ($register->validate()) {
+
+            $register->register();
+
+            $session->flash('success', "Utworzyłeś konto użytkownika !");
+
+            redirect("/register");
+
+        }
+    }
+}
 ?>
 
 <!doctype html>
@@ -22,18 +55,18 @@ require_once('../init.php');
 <body>
 <h1 class="text-center">Zarejestruj się</h1>
 <div class="container">
-    <form method="post">
+    <form method="post" action="">
         <div class="form-group">
-            <label for="exampleInputLogin">Login</label>
+            <label for="exampleInputregister">Login</label>
             <input
                 type="text"
-                class="form-control <?php  //echo $login->has('username') ? ' is-invalid' : '' ?>"
+                class="form-control <?php  echo $register->has('username') ? ' is-invalid' : '' ?>"
                 name="username"
                 placeholder="Wpisz login"
             >
 
             <div class="invalid-feedback">
-                <?php //echo $login->first('username');?>
+                <?php echo $register->first('username');?>
             </div>
 
         </div>
@@ -41,42 +74,42 @@ require_once('../init.php');
         <div class="form-group">
             <label for="exampleInputEmail">Email</label>
             <input
-                type="text"
-                class="form-control <?php  //echo $login->has('username') ? ' is-invalid' : '' ?>"
+                type="email"
+                class="form-control <?php  echo $register->has('email') ? ' is-invalid' : '' ?>"
                 name="email"
                 placeholder="Wpisz email"
             >
 
             <div class="invalid-feedback">
-                <?php //echo $login->first('username');?>
+                <?php echo $register->first('email');?>
             </div>
 
         </div>
         <div class="form-group">
             <label for="exampleInputName">Imię</label>
             <input
-                type="password"
-                class="form-control <?php  //echo $login->has('password') ? ' is-invalid' : '' ?>"
+                type="text"
+                class="form-control <?php  echo $register->has('name') ? ' is-invalid' : '' ?>"
                 name="name"
                 placeholder="Wpisz imię"
             >
 
             <div class="invalid-feedback">
-                <?php //echo $login->first('password');?>
+                <?php echo $register->first('name');?>
             </div>
         </div>
 
         <div class="form-group">
             <label for="exampleInputSurname">Nazwisko</label>
             <input
-                type="password"
-                class="form-control <?php  //echo $login->has('password') ? ' is-invalid' : '' ?>"
+                type="text"
+                class="form-control <?php  echo $register->has('surname') ? ' is-invalid' : '' ?>"
                 name="surname"
                 placeholder="Wpisz nazwisko"
             >
 
             <div class="invalid-feedback">
-                <?php //echo $login->first('password');?>
+                <?php echo $register->first('surname');?>
             </div>
         </div>
 
@@ -84,32 +117,35 @@ require_once('../init.php');
             <label for="exampleInputPassword">Hasło</label>
             <input
                 type="password"
-                class="form-control <?php  //echo $login->has('password') ? ' is-invalid' : '' ?>"
+                class="form-control <?php  echo $register->has('password') ? ' is-invalid' : '' ?>"
                 name="password"
                 placeholder="Wpisz hasło"
             >
 
             <div class="invalid-feedback">
-                <?php //echo $login->first('password');?>
+                <?php echo $register->first('password');?>
             </div>
         </div>
 
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" name="submit">Zarejestruj się</button>
+            <a href="/" class="btn btn-warning" style="margin-left: 1rem">Cofnij</a>
+        </div>
 
 
-        <button type="submit" class="btn btn-primary" name="submit">Zarejestruj się</button>
     </form>
 
 
 
 
-    <?php //if ($login->has('verify')) :?>
-        <!--<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?php //echo $login->first('verify') ?>
+    <?php if (isset($message)):?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 1rem">
+            <?php echo $message; ?> <a href="/">Powrót do panelu logowania</a>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-        </div>-->
-    <?php //endif; ?>
+        </div>
+    <?php endif; ?>
 
 </div>
 

@@ -91,7 +91,7 @@ if ($session->isSigned()) {
 
 
     <?php if ($login->has('verify')) :?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 1rem">
             <?php echo $login->first('verify') ?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
