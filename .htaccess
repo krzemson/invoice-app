@@ -65,6 +65,9 @@ RewriteRule ^admin/customer/([0-9]+)/?$ /admin/editCustomer.php?id=$1 [NC,L,QSA]
 RewriteEngine on
 RewriteRule ^admin/supplier/([0-9]+)/?$ /admin/editSupplier.php?id=$1 [NC,L,QSA]
 
+RewriteEngine on
+RewriteRule ^admin/edit/invoice/([0-9]+)/?$ /admin/editInvoice.php?id=$1 [NC,L,QSA]
+
 #API
 
 #INVOICE
@@ -80,4 +83,15 @@ RewriteRule ^api/customers/([0-9]+)/?$ api/customer/customers.php?id=$1 [NC,L]
 #LOGIN
 RewriteEngine on
 RewriteRule ^api/login api/user/login.php [NC,L,QSA]
+
+#REGISTER
+RewriteEngine on
+RewriteRule ^api/register api/user/register.php [NC,L,QSA]
+
+#RESOURCES
+
+RewriteEngine On
+RewriteRule ^api/resources api/resources/resources.php [NC,L]
+
+
 

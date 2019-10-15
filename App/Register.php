@@ -51,7 +51,7 @@ class Register
         $user->username = $this->username;
         $user->password = password_hash($this->password, PASSWORD_DEFAULT);
         $user->name = $this->name;
-        $user->surname = $this->name;
+        $user->surname = $this->surname;
         $user->email = $this->email;
 
         $user->save();

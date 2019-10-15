@@ -7,12 +7,14 @@ class API
     private $invoice;
     private $user;
     private $customer;
+    private $register;
 
     public function __construct()
     {
         $this->user = new Login();
         $this->invoice = new Invoice();
         $this->customer = new Customer();
+        $this->register = new Register();
     }
 
     public function login($username, $password)
@@ -53,7 +55,6 @@ class API
             // set response code - 404 Not found
             http_response_code(404);
 
-            // tell the user product does not exist
             echo json_encode(array("message" => "Invoice does not exist."));
         }
     }
@@ -190,7 +191,6 @@ class API
             // set response code - 404 Not found
             http_response_code(404);
 
-            // tell the user product does not exist
             echo json_encode(array("message" => "Customer does not exist."));
         }
     }
@@ -198,7 +198,7 @@ class API
     public function allCustomers($id)
     {
         if ($customers = Customer::findAllCustomers($id)) {
-            // products array
+
             $customer_arr = array();
             $customer_arr["customers"] = array();
 
@@ -228,4 +228,40 @@ class API
         }
     }
 
+    public function resources($id)
+    {
+
+        $invoices = count(Invoice::findAllInvoices($id));
+        $invoicesP = count(InvoiceP::findAllInvoices($id));
+        $customers = count(Customer::findAllCustomers($id));
+        $suppliers = count(Supplier::findAllSuppliers($id));
+        $services = count(Service::findAllServicesForAllUserServices($id));
+        $servicesP = count(ServiceP::findAllServicesForAllUserServices($id));
+
+        $invoice_arr = array(
+            "invoices" => $invoices,
+            "invoicesP" => $invoicesP,
+            "customers" => $customers,
+            "suppliers" => $suppliers,
+            "services" => $services,
+            "servicesP" => $servicesP,
+        );
+
+        // set response code - 200 OK
+        http_response_code(200);
+
+        // make it json format
+        echo json_encode($invoice_arr);
+    }
+
+    public function register($data)
+    {
+        $this->register->setDataRegister($data->username, $data->password, $data->email, $data->name, $data->surname);
+
+        $this->register->register();
+
+        http_response_code(201);
+
+        echo json_encode(array("message" => "User has been created"));
+    }
 }

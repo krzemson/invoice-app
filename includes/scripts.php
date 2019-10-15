@@ -10,6 +10,7 @@ $servicesP = count(\App\ServiceP::findAllServicesForAllUserServices($profile->id
 //$lines = count($data->lines);
 
 isset($data) ? $lines = count($data->lines) : $lines = 1;
+isset($invoice) ? $countInvoice = count($invoice->services()) : $countInvoice = 1;
 ?>
 
 <!-- jQuery -->
@@ -126,6 +127,26 @@ isset($data) ? $lines = count($data->lines) : $lines = 1;
         }
 
         for (var i = 1; i <= <?php echo $lines ?>; i++) {
+            let x = i;
+
+            $(document).on("keyup", "#net"+x, function () {
+                let n = myF(x);
+
+                $("#netv"+n).val(($(this).val() * $("#quantity"+n).val()).toFixed(2));
+                $("#tax"+n).val(($("#netv"+n).val() * 0.23).toFixed(2));
+                $("#gross"+n).val(($("#netv"+n).val() * 1.23).toFixed(2));
+            });
+
+            $(document).on("keyup", "#quantity"+x, function () {
+                let n = myF(x);
+
+                $("#netv"+n).val(($(this).val() * $("#net"+n).val()).toFixed(2));
+                $("#tax"+n).val(($("#netv"+n).val() * 0.23).toFixed(2));
+                $("#gross"+n).val(($("#netv"+n).val() * 1.23).toFixed(2));
+            });
+        }
+
+        for (var i = 1; i <= <?php echo $countInvoice ?>; i++) {
             let x = i;
 
             $(document).on("keyup", "#net"+x, function () {

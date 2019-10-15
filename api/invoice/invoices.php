@@ -78,8 +78,6 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) & !empty($_SERVER["HTTP_AUTHORIZATION"
 
                 $data = json_decode(file_get_contents("php://input"));
 
-               //var_dump($data);
-
                 $api->createInvoice($data);
 
             } catch (Exception $e) {
