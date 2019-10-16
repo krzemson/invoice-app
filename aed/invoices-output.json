@@ -1,0 +1,25 @@
+[
+    {
+        "amount": 245.98,
+        "currency": "PLN",
+        "date": "2019-10-06",
+        "date_issue": "2019-10-06",
+        "date_payment": "2019-10-06",
+        "desc": "Invoice from COLSPAN",
+        "invoice_number": "67/2019",
+        "issuer": "COLSPAN",
+        "lines": [
+            {
+                "brutto": "245.98",
+                "description": "Chair",
+                "jm": "szt",
+                "lp": "1",
+                "netto": "199.99",
+                "quan": "1",
+                "vat": "45.99",
+                "vatp": "23%",
+                "wnetto": "199.99"
+            }
+        ]
+    }
+]

@@ -1,0 +1,18 @@
+issuer: Faktura
+keywords:
+- Faktura
+fields:
+  amount: Do zapłaty:\s+(\d+\.\d+)\s+zł
+  date: Data wystawienia:\s+(\d+-\d+-\d+)
+  date_issue: Data usługi/wykonania:\s+(\d+-\d+-\d+)
+  date_payment: Termin zapłaty:\s+(\d+-\d+-\d+)
+  invoice_number: FV-(\w+\/\w+)
+options:
+  remove_whitespace: false
+  currency: PLN
+  date_formats:
+    - '%Y/%m/%d'
+lines:
+    start: LP\s+(Nazwa\s+towaru\s+lub\s+usługi)\s+Ilość\s+JM\s+(Cena\s+netto)\s+(Wartość\s+netto)\s+(VAT\s+%)\s+VAT\s+(Wartość\s+brutto)
+    end: \s+Razem
+    line: (?P<lp>\d+)\s+(?P<description>[\w\s]+)\s+(?P<quan>\d+)\s+(?P<jm>\w+)\s+(?P<netto>\d+\.\d+)\s+(?P<wnetto>\d+\.\d+)\s+(?P<vatp>\w+?%)\s+(?P<vat>\d+\.\d+)\s+(?P<brutto>\d+\.\d+)
