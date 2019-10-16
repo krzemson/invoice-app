@@ -86,6 +86,7 @@ RewriteRule ^api/customers/([0-9]+)/?$ api/customer/customers.php?id=$1 [NC,L]
 #LOGIN
 RewriteEngine on
 RewriteRule ^api/login api/user/login.php [NC,L,QSA]
+RewriteRule ^api/user/([0-9]+)/?$ api/user/user.php?id=$1 [NC,L]
 
 #REGISTER
 RewriteEngine on

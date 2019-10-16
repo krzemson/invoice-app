@@ -125,7 +125,6 @@ if (isset($_SERVER["HTTP_AUTHORIZATION"]) & !empty($_SERVER["HTTP_AUTHORIZATION"
             } else {
                 http_response_code(404);
 
-                // tell the user product does not exist
                 echo json_encode(array("message" => "Invoice does not exist."));
             }
             break;

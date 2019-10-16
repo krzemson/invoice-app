@@ -264,4 +264,34 @@ class API
 
         echo json_encode(array("message" => "User has been created"));
     }
+
+    public function editUser($id, $data)
+    {
+        ;
+
+        if (!$user = User::findById($id)) {
+            http_response_code(404);
+
+            echo json_encode(array("message" => "User does not exist."));
+        } else {
+            $user->name = empty($data->name) ? $user->name : $data->name;
+            $user->surname = empty($data->surname) ? $user->surname : $data->surname;
+            $user->company = empty($data->company) ? $user->company : $data->company;
+            $user->address = empty($data->address) ? $user->address : $data->address;
+            $user->city = empty($data->city) ? $user->city : $data->city;
+            $user->nip = empty($data->nip) ? $user->nip : $data->nip;
+            $user->regon = empty($data->regon) ? $user->regon : $data->regon;
+            $user->email = empty($data->email) ? $user->email : $data->email;
+
+            if ($user->save()) {
+                http_response_code(200);
+
+                echo json_encode(array("message" => "User has been updated"));
+            } else {
+                http_response_code(503);
+
+                echo json_encode(array("message" => "Unable to update user"));
+            }
+        }
+    }
 }
