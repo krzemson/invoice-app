@@ -70,7 +70,7 @@ if (isset($_POST['submit'])) {
                                 <td><?php echo $invoice->date_issue; ?></td>
                                 <td><?php echo $invoice->date_service; ?></td>
                                 <td align="center"><a href="purchases/<?php echo $invoice->id; ?>" class="btn btn-primary" target="_blank">Podgląd</a></td>
-                                <td align="center"><a href="edit/invoice/<?php echo $invoice->id; ?>" class="btn btn-warning" target="_blank">Edytuj</a></td>
+                                <td align="center"><a href="edit/purchase/<?php echo $invoice->id; ?>" class="btn btn-warning">Edytuj</a></td>
                                 <td align="center">
                                     <form action="" method="post">
                                         <input type="hidden" value="<?php echo $invoice->id; ?>" name="id">

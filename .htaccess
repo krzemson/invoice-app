@@ -68,6 +68,9 @@ RewriteRule ^admin/supplier/([0-9]+)/?$ /admin/editSupplier.php?id=$1 [NC,L,QSA]
 RewriteEngine on
 RewriteRule ^admin/edit/invoice/([0-9]+)/?$ /admin/editInvoice.php?id=$1 [NC,L,QSA]
 
+RewriteEngine on
+RewriteRule ^admin/edit/purchase/([0-9]+)/?$ /admin/editInvoiceP.php?id=$1 [NC,L,QSA]
+
 #API
 
 #INVOICE
